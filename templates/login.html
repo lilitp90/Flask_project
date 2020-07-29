@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block content %}
+
+<form class="loginreg" action="{{ url_for('login')}}" method="post">
+    {{ form.csrf_token }} {% with messages = get_flashed_messages(with_categories=true) %} {% for category, message in messages %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %} {% endwith %}
+    <h4> Login</h4>
+    <input class="usercreds" type="text" name="username" placeholder="Enter Username" />
+    <input class="usercreds" type="password" name="password" placeholder="Enter Password" />
+    <input class="button" type="submit" value="Log in" />
+    <a id="reg" href="{{ url_for('register') }}"> Register</a>
+</form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block nav %}
+<a id="logout" href="{{ url_for('logout') }}">
+    <span class="glyphicon glyphicon-log-out"></span>
+</a>
+{% endblock nav %} {% block content %} {%for i in details %}
+<div class="detail">
+    <strong> Book name: </strong> {{i[2]}}
+    <br>
+    <strong> Author: </strong> {{i[4]}}
+    <br>
+    <strong> Publication year: </strong> {{i[3]}}
+    <br>
+    <strong> ISBN: </strong> {{i[1]}}
+    <br>
+</div>
+
+{%endfor%}
+
+<h3> Goodreads ratings: </h3> {% if average_rating %}
+<div class="detail">
+    <p> Average rating:{{average_rating}}</p>
+    {% if work_ratings_count %}
+    <p> Number of ratings:{{work_ratings_count}} </p>
+</div>
+{% endif %} {% endif %}
+<form class="rating" method="post">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% for category, message in messages %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %} {% endwith %}
+    <legend>Please rate:</legend>
+    <input type="radio" id="star5" name="rating" value="5" />
+    <label for="star5" title="Rocks!">5 stars</label>
+    <input type="radio" id="star4" name="rating" value="4" />
+    <label for="star4" title="Pretty good">4 stars</label>
+    <input type="radio" id="star3" name="rating" value="3" />
+    <label for="star3" title="Meh">3 stars</label>
+    <input type="radio" id="star2" name="rating" value="2" />
+    <label for="star2" title="Kinda bad">2 stars</label>
+    <input type="radio" id="star1" name="rating" value="1" />
+    <label for="star1" title="Very bad">1 star</label>
+    <textarea class="form-control" rows="6" placeholder="Leave your review here!" name="review"></textarea>
+    <button type="submit" class="searchButton" id="submit_review">Submit</button>
+
+</form>
+
+{% endblock %}

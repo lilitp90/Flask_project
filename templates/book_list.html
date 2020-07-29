@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block nav %}
+<a id="logout" href="{{ url_for('logout') }}">
+    <span class="glyphicon glyphicon-log-out"></span>
+</a>
+{% endblock nav %} {% block content %}
+<h3> See below the books by {{ searched[0][1] }}: </h3>
+<ul>
+    {%for i in searched %}
+    <li id="books"><a href="{{ url_for('details', selected=i.isbn)}}"> {{i[0]}} <br></a></li>
+
+    {%endfor%}
+
+</ul>
+
+{% endblock %}
